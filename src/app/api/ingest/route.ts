@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
-import { handleBootstrapping } from "../../services/bootstrap";
+import { handleBootstrapping } from '../../services/bootstrap';
 
 export const maxDuration = 300;
 

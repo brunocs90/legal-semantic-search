@@ -34,20 +34,20 @@ export async function createIndexIfNecessary(indexName: string) {
       serverless: {
         cloud: 'aws',
         region: 'us-east-1',
-      }
+      },
     },
     waitUntilReady: true,
-    suppressConflicts: true
+    suppressConflicts: true,
   });
 }
 
 export async function pineconeIndexHasVectors(indexName: string): Promise<boolean> {
   try {
-    const targetIndex = pinecone.index(indexName)
+    const targetIndex = pinecone.index(indexName);
 
     const stats = await targetIndex.describeIndexStats();
 
-    return (stats.totalRecordCount && stats.totalRecordCount > 0) ? true : false;
+    return stats.totalRecordCount && stats.totalRecordCount > 0 ? true : false;
   } catch (error) {
     console.error('Error checking Pinecone index:', error);
     return false;
@@ -59,14 +59,13 @@ export async function pineconeIndexExists(indexName: string): Promise<boolean> {
     const { indexes } = await pinecone.listIndexes();
 
     // Check if index already exists
-    const indexNames = (indexes && indexes.length ? indexes.map(index => index.name) : []);
+    const indexNames = indexes && indexes.length ? indexes.map((index) => index.name) : [];
 
     if (!indexNames.includes(indexName)) {
       return false;
     }
 
-    return true
-
+    return true;
   } catch (error) {
     console.error('Error checking Pinecone index:', error);
     return false;
